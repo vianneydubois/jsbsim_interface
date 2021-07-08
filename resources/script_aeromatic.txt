@@ -1,4 +1,4 @@
-/Users/vianneydubois/Desktop
+/Users/vianneydubois/PycharmProjects/jsbsim_interface/resources/aircraft
 yes
 yes
 cessna172_3
@@ -42,3 +42,4 @@ no
 yes
 no
 no
+
