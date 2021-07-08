@@ -1,7 +1,7 @@
-/Users/vianneydubois/PycharmProjects/jsbsim_interface/resources/aircraft
+/Users/vianneydubois/PycharmProjects/jsbsim_interface/aircraft
 yes
 yes
-cessna172_3
+tb9
 no
 1
 0
@@ -26,13 +26,13 @@ no
 1.085
 4.52
 yes
-cessna172_engine
+tb9_engine
 1
 0
 0
 134
 2700
-cessna172_prop
+tb9_prop
 2.03
 yes
 yes
@@ -42,4 +42,11 @@ no
 yes
 no
 no
+
+o
+no
+
+o
+
+o
 
