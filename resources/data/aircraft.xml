@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<FASTOAD_model>
+	<data>
+		<TLAR>
+			<approach_speed units="m/s">33.33</approach_speed>
+		</TLAR>
+		<geometry>
+			<fuselage>
+				<length units="m">8.28</length>
+			</fuselage>
+			<wing>
+				<area units="m**2">16.17</area>
+				<aspect_ratio units="">7.48</aspect_ratio>
+				<span units="m">11</span>
+				<root_chord units="m">1.66</root_chord>
+				<tip_chord units="m">1.1</tip_chord>
+				<sweep_25 units="deg">0</sweep_25>
+				<dihedral units="deg">2</dihedral>
+				<incidence units="deg">0</incidence>
+			</wing>
+			<horizontal_tail>
+				<area units="m**2">3.83</area>
+				<arm units="m">5.27</arm>
+			</horizontal_tail>
+			<vertical_tail>
+				<area units="m**2">1.085</area>
+				<arm units="m">4.52</arm>
+			</vertical_tail>
+			<propulsion>
+				<layout units="">0</layout>
+				<count units="">1</count>
+			</propulsion>
+			<extra>
+				<flaps units="">1</flaps>
+				<spoilers units="">0</spoilers>
+				<chute units="">0</chute>
+			</extra>
+		</geometry>
+		<weight>
+			<aircraft>
+				<MTOW units="kg">1250</MTOW>
+				<OWE units="kg">75</OWE>
+			</aircraft>
+			<inertia>
+				<Ixx units="kg m**2">1285</Ixx>
+				<Iyy units="kg m**2">1825</Iyy>
+				<Izz units="kg m**2">2667</Izz>
+			</inertia>
+		</weight>
+		<propulsion>
+			<engine>
+				<type units="">0</type>
+				<power units="kW">134</power>
+				<max_rpm units="rpm">2700</max_rpm>
+			</engine>
+			<propeller>
+				<diameter units="m">2.03</diameter>
+				<fixed_pitch units="">1.0</fixed_pitch>
+			</propeller>
+		</propulsion>
+		<landing_gear>
+			<retractable units="">0.0</retractable>
+			<type units="">0</type>
+			<taildragger units="">0</taildragger>
+		</landing_gear>
+	</data>
+</FASTOAD_model>
