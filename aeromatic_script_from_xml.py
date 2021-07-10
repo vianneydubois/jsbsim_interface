@@ -9,13 +9,24 @@ import xml.etree.ElementTree as ET
 def generate_script(aeromatic_script_path: str, xml_file_path: str, aircraft_name: str):
     aircraft_dir = 'aircraft'
 
-    script = open(aeromatic_script_path, 'r+')
-    script_lines = script.readlines()
+    script = open(aeromatic_script_path, 'w')
+    script_lines = ['\n']*45
 
     # output directory
     script_lines[0] = os.path.abspath(aircraft_dir) + '\n'
+    # create subdirectory
+    script_lines[1] = 'yes' + '\n'
+    # overwrite
+    script_lines[2] = 'yes' + '\n'
     # aircraft name
     script_lines[3] = aircraft_name + '\n'
+    # use dedicated system files
+    script_lines[4] = 'yes' + '\n'
+    # system of measurement (0 : English, 1 : metric)
+    script_lines[5] = '1' + '\n'
+    # type of aircraft (0 : light, 1 : high perf, 2 : fighter, 3 : jet transport, 4 : prop transport)
+    script_lines[6] = '0' + '\n'
+
     script_lines[28] = aircraft_name + '_engine\n'
     script_lines[34] = aircraft_name + '_prop\n'
 

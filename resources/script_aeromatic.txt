@@ -2,7 +2,7 @@
 yes
 yes
 c172
-no
+yes
 1
 0
 92.298
