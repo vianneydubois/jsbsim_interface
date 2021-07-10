@@ -21,7 +21,7 @@ def generate_script(aeromatic_script_path: str, xml_file_path: str, aircraft_nam
     # aircraft name
     script_lines[3] = aircraft_name + '\n'
     # use dedicated system files
-    script_lines[4] = 'yes' + '\n'
+    script_lines[4] = 'no' + '\n'
     # system of measurement (0 : English, 1 : metric)
     script_lines[5] = '1' + '\n'
     # type of aircraft (0 : light, 1 : high perf, 2 : fighter, 3 : jet transport, 4 : prop transport)
@@ -139,10 +139,10 @@ def generate_script(aeromatic_script_path: str, xml_file_path: str, aircraft_nam
 
 XML_PATH = 'resources/data/aircraft.xml'
 
-AIRCRAFT_NAME = 'c172'
+AIRCRAFT_NAME = 'cessna_172'
 
 AEROMATIC_SCRIPT_FOLDER = 'resources'
-AEROMATIC_SCRIPT_FILE = 'script_aeromatic.txt'
+AEROMATIC_SCRIPT_FILE = 'script_aeromatic_1.txt'
 
 aeromatic_script_path = os.path.join(AEROMATIC_SCRIPT_FOLDER, AEROMATIC_SCRIPT_FILE)
 

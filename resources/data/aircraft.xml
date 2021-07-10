@@ -38,8 +38,8 @@
 		</geometry>
 		<weight>
 			<aircraft>
-				<MTOW units="kg">1250</MTOW>
-				<OWE units="kg">75</OWE>
+				<MTOW units="kg">1157</MTOW>
+				<OWE units="kg">744</OWE>
 			</aircraft>
 			<inertia>
 				<Ixx units="kg m**2">1285</Ixx>

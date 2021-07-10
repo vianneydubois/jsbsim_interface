@@ -41,8 +41,8 @@ geometry_list = [fuselage,
                  extra]
 
 mass_aircraft = ['aircraft',
-                 [['MTOW', 1250, 'kg'],
-                  ['OWE', 75, 'kg']]
+                 [['MTOW', 1157, 'kg'],
+                  ['OWE', 744, 'kg']]
                  ]
 inertia = ['inertia',
         [['Ixx', 1285, 'kg m**2'],
