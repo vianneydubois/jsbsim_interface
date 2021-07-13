@@ -142,7 +142,7 @@ XML_PATH = 'resources/data/aircraft.xml'
 AIRCRAFT_NAME = 'cessna_172'
 
 AEROMATIC_SCRIPT_FOLDER = 'resources'
-AEROMATIC_SCRIPT_FILE = 'script_aeromatic_1.txt'
+AEROMATIC_SCRIPT_FILE = 'script_aeromatic.txt'
 
 aeromatic_script_path = os.path.join(AEROMATIC_SCRIPT_FOLDER, AEROMATIC_SCRIPT_FILE)
 

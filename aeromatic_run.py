@@ -5,7 +5,7 @@ import os.path
 import subprocess as sp
 
 AEROMATIC_SCRIPT_FOLDER = 'resources'
-AEROMATIC_SCRIPT_FILE = 'script_aeromatic_1.txt'
+AEROMATIC_SCRIPT_FILE = 'script_aeromatic.txt'
 aeromatic_script_path = os.path.join(AEROMATIC_SCRIPT_FOLDER, AEROMATIC_SCRIPT_FILE)
 
 AEROMATIC_EXE_FOLDER = 'resources' + os.path.sep + 'executables'
