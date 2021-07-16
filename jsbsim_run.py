@@ -26,7 +26,8 @@ def edit_jsbsim_script(script_name: str, aircraft_name: str, init_file_name: str
     return
 
 
-def run_jsbsim(jsbsim_source_path: str, jsbsim_script_path: str):
+def run_jsbsim(jsbsim_source_path: str, aircraft_name: str, script_name: str):
+    jsbsim_script_path = os.path.join('aircraft', aircraft_name, 'scripts', script_name + '.xml')
     command = 'python3 '
     command += jsbsim_source_path
     command += ' --script=' + jsbsim_script_path
@@ -75,18 +76,13 @@ def remove_script_file(aircraft_name: str):
 
 AIRCRAFT_NAME = 'c172'
 INIT_FILE_NAME = 'airborne'
-SCRIPT_FILE_NAME = 'roll'
+SCRIPT_FILE_NAME = 'yaw'
 
-JSBSIM_SOURCE_PATH = '/Users/vianneydubois/PycharmProjects/jsbsim_interface/resources/JSBSim.py'
+JSBSIM_SOURCE_PATH = os.path.join('resources', 'JSBSim.py')
 
 jsbsim_script_path = os.path.join('aircraft', AIRCRAFT_NAME, 'scripts', SCRIPT_FILE_NAME + '.xml')
 
-copy_script_file('roll', 'c172')
-
+copy_script_file(SCRIPT_FILE_NAME, AIRCRAFT_NAME)
 edit_jsbsim_script(SCRIPT_FILE_NAME, AIRCRAFT_NAME, INIT_FILE_NAME)
-
-run_jsbsim(JSBSIM_SOURCE_PATH, jsbsim_script_path)
-
-remove_script_file('c172')
-
-# knowing the aircraft name, the program should know the paths, OR knowing the path, it should know the name
+run_jsbsim(JSBSIM_SOURCE_PATH, AIRCRAFT_NAME, SCRIPT_FILE_NAME)
+remove_script_file(AIRCRAFT_NAME)

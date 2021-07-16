@@ -8,7 +8,7 @@
   </description>
 
   <use aircraft="cessna_172" initialize="scripts/airborne" />
-  <run start="0" end="4" dt="0.00833333">
+  <run start="0" end="10" dt="0.00833333">
 
     
 

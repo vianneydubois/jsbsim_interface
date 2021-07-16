@@ -10,5 +10,7 @@
   <running>                -1   </running>
   <altitude unit="FT">  3000.0  </altitude>
   <vc unit="KTS">        100.0  </vc>
+  <psi unit="DEG">  180.0   </psi>
+
 
 </initialize>
