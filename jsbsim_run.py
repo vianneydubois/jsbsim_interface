@@ -3,7 +3,8 @@ import shutil
 import xml.etree.ElementTree as et
 
 
-def edit_jsbsim_script(jsbsim_script_path: str, aircraft_name: str, init_file_name: str):
+def edit_jsbsim_script(script_name: str, aircraft_name: str, init_file_name: str):
+    jsbsim_script_path = os.path.join('aircraft', aircraft_name, 'scripts', script_name + '.xml')
     script = et.parse(jsbsim_script_path)
     root = script.getroot()
     use = root.find('use')
@@ -79,10 +80,10 @@ SCRIPT_FILE_NAME = 'roll'
 JSBSIM_SOURCE_PATH = '/Users/vianneydubois/PycharmProjects/jsbsim_interface/resources/JSBSim.py'
 
 jsbsim_script_path = os.path.join('aircraft', AIRCRAFT_NAME, 'scripts', SCRIPT_FILE_NAME + '.xml')
-print(jsbsim_script_path)
+
 copy_script_file('roll', 'c172')
 
-edit_jsbsim_script(jsbsim_script_path, AIRCRAFT_NAME, INIT_FILE_NAME)
+edit_jsbsim_script(SCRIPT_FILE_NAME, AIRCRAFT_NAME, INIT_FILE_NAME)
 
 run_jsbsim(JSBSIM_SOURCE_PATH, jsbsim_script_path)
 
