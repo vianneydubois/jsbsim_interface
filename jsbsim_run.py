@@ -46,3 +46,6 @@ run_jsbsim(JSBSIM_SOURCE_PATH, JSBSIM_SCRIPT_PATH)
 # the script should be taken from a script library, then copied in the desired aircraft file
 # then sim is ran
 # then the custom script is deleted
+
+# a generic folder with all the init files and all the scripts
+#
