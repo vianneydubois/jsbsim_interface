@@ -76,7 +76,7 @@ def remove_script_file(aircraft_name: str):
 
 AIRCRAFT_NAME = 'c172'
 INIT_FILE_NAME = 'airborne'
-SCRIPT_FILE_NAME = 'yaw'
+SCRIPT_FILE_NAME = 'roll'
 
 JSBSIM_SOURCE_PATH = os.path.join('resources', 'JSBSim.py')
 
