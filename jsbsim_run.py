@@ -24,11 +24,47 @@ def edit_jsbsim_script(jsbsim_script_path: str, aircraft_name: str, init_file_na
     return
 
 
-def run_jsbsim(jsbsim_source_path, jsbsim_script_path):
+def run_jsbsim(jsbsim_source_path: str, jsbsim_script_path: str):
     command = 'python3 '
     command += jsbsim_source_path
     command += ' --script=' + jsbsim_script_path
     os.system(command)
+    return
+
+
+def copy_script_file(desired_script_name: str, aircraft_name: str):
+
+    # create a 'scripts' folder
+    scripts_folder_path = os.path.join('aircraft', aircraft_name, 'scripts')
+    os.makedirs(scripts_folder_path)
+
+    # copy script file
+    source_path = os.path.join('resources', 'sim_scripts', desired_script_name + '.xml')
+    with open(source_path, 'r') as source:
+        # copy source script
+        source_script = source.readlines()
+
+        destination_path = os.path.join(scripts_folder_path, desired_script_name + '.xml')
+        with open(destination_path, 'w') as destination:
+            # write into a new file
+            destination.writelines(source_script)
+
+    # copy initialize file
+    init_source_file = os.path.join('resources', 'sim_init', 'airborne.xml')
+    with open(init_source_file, 'r') as source:
+        # copy source script
+        source_init = source.readlines()
+
+        destination_path = os.path.join(scripts_folder_path, '.xml')
+        with open(destination_path, 'w') as destination:
+            # write into a new file
+            destination.writelines(source_init)
+
+    return
+
+
+def remove_script_file(aircraft_name: str):
+    # remove the 'scripts' folder
     return
 
 
@@ -41,6 +77,8 @@ JSBSIM_SOURCE_PATH = '/Users/vianneydubois/PycharmProjects/jsbsim_interface/reso
 edit_jsbsim_script(JSBSIM_SCRIPT_PATH, AIRCRAFT_NAME, INIT_FILE_NAME)
 
 run_jsbsim(JSBSIM_SOURCE_PATH, JSBSIM_SCRIPT_PATH)
+
+copy_script_file('ok', 'c172')
 
 # knowing the aircraft name, the program should know the paths, OR knowing the path, it should know the name
 # the script should be taken from a script library, then copied in the desired aircraft file
