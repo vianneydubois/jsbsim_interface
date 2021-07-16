@@ -28,10 +28,10 @@ fig, axs = plt.subplots(2, 1)
 
 axs[0].axhline(Phi_lim, color='grey', linestyle='dashed', linewidth=1)
 axs[0].axvline(df1_t_lim, color='b', linestyle='dashed', linewidth=1)
-axs[0].axvline(df2_t_lim, color='g', linestyle='dashed', linewidth=1)
+#axs[0].axvline(df2_t_lim, color='g', linestyle='dashed', linewidth=1)
 
 axs[0].plot(df1['Time'], df1['Phi deg'], color='b', label='AVL')
-axs[0].plot(df2['Time'], df2['Phi deg'], color='g', label='AeromatiC++')
+#axs[0].plot(df2['Time'], df2['Phi deg'], color='g', label='AeromatiC++')
 
 
 axs[1].plot(df1['Time'], df1['Delta deg'], color='r')
