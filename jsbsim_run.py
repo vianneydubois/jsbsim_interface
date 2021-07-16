@@ -1,8 +1,10 @@
 import os
+import shutil
 import xml.etree.ElementTree as et
 
 
-def edit_jsbsim_script(jsbsim_script_path: str, aircraft_name: str, init_file_name: str):
+def edit_jsbsim_script(script_name: str, aircraft_name: str, init_file_name: str):
+    jsbsim_script_path = os.path.join('aircraft', aircraft_name, 'scripts', script_name + '.xml')
     script = et.parse(jsbsim_script_path)
     root = script.getroot()
     use = root.find('use')
@@ -24,7 +26,8 @@ def edit_jsbsim_script(jsbsim_script_path: str, aircraft_name: str, init_file_na
     return
 
 
-def run_jsbsim(jsbsim_source_path, jsbsim_script_path):
+def run_jsbsim(jsbsim_source_path: str, aircraft_name: str, script_name: str):
+    jsbsim_script_path = os.path.join('aircraft', aircraft_name, 'scripts', script_name + '.xml')
     command = 'python3 '
     command += jsbsim_source_path
     command += ' --script=' + jsbsim_script_path
@@ -32,20 +35,54 @@ def run_jsbsim(jsbsim_source_path, jsbsim_script_path):
     return
 
 
-JSBSIM_SCRIPT_PATH = 'aircraft/cessna_172/scripts/trim_cruise.xml'
-AIRCRAFT_NAME = 'cessna_172'
+def copy_script_file(desired_script_name: str, aircraft_name: str):
+
+    # create a 'scripts' folder
+    scripts_folder_path = os.path.join('aircraft', aircraft_name, 'scripts')
+    if not os.path.exists(scripts_folder_path):
+        os.makedirs(scripts_folder_path)
+
+    # copy script file
+    source_path = os.path.join('resources', 'sim_scripts', desired_script_name + '.xml')
+    with open(source_path, 'r') as source:
+        # copy source script
+        source_script = source.readlines()
+
+        destination_path = os.path.join(scripts_folder_path, desired_script_name + '.xml')
+        with open(destination_path, 'w') as destination:
+            # write into a new file
+            destination.writelines(source_script)
+
+    # copy initialize file
+    init_source_file = os.path.join('resources', 'sim_init', 'airborne.xml')
+    with open(init_source_file, 'r') as source:
+        # copy source scriptq
+        source_init = source.readlines()
+
+        destination_path = os.path.join(scripts_folder_path, 'airborne.xml')
+        with open(destination_path, 'w') as destination:
+            # write into a new file
+            destination.writelines(source_init)
+
+    return
+
+
+def remove_script_file(aircraft_name: str):
+    # removes the 'scripts' folder
+    scripts_folder_path = os.path.join('aircraft', aircraft_name, 'scripts')
+    shutil.rmtree(scripts_folder_path)
+    return
+
+
+AIRCRAFT_NAME = 'c172'
 INIT_FILE_NAME = 'airborne'
+SCRIPT_FILE_NAME = 'yaw'
 
-JSBSIM_SOURCE_PATH = '/Users/vianneydubois/PycharmProjects/jsbsim_interface/resources/JSBSim.py'
+JSBSIM_SOURCE_PATH = os.path.join('resources', 'JSBSim.py')
 
-edit_jsbsim_script(JSBSIM_SCRIPT_PATH, AIRCRAFT_NAME, INIT_FILE_NAME)
+jsbsim_script_path = os.path.join('aircraft', AIRCRAFT_NAME, 'scripts', SCRIPT_FILE_NAME + '.xml')
 
-run_jsbsim(JSBSIM_SOURCE_PATH, JSBSIM_SCRIPT_PATH)
-
-# knowing the aircraft name, the program should know the paths, OR knowing the path, it should know the name
-# the script should be taken from a script library, then copied in the desired aircraft file
-# then sim is ran
-# then the custom script is deleted
-
-# a generic folder with all the init files and all the scripts
-#
+copy_script_file(SCRIPT_FILE_NAME, AIRCRAFT_NAME)
+edit_jsbsim_script(SCRIPT_FILE_NAME, AIRCRAFT_NAME, INIT_FILE_NAME)
+run_jsbsim(JSBSIM_SOURCE_PATH, AIRCRAFT_NAME, SCRIPT_FILE_NAME)
+remove_script_file(AIRCRAFT_NAME)

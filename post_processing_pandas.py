@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
-JSBSIM_OUTPUT_FILE_PATH_AVL = "/Users/vianneydubois/Documents/Cours/Supaéro/Stage S4 DCAS/JSBSim/essais/aircraft/cessna172avl/essai.csv"
+JSBSIM_OUTPUT_FILE_PATH_AVL = "aircraft/c172/result.csv"
 JSBSIM_OUTPUT_FILE_PATH_AEROMATIC = "/Users/vianneydubois/Documents/Cours/Supaéro/Stage S4 DCAS/JSBSim/essais/aircraft/cessna172/essai.csv"
 
 Phi_lim = -60
