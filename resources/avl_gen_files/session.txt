@@ -1,12 +1,11 @@
 LOAD
 /Users/vianneydubois/PycharmProjects/jsbsim_interface/resources/avl_gen_files/gen_geom.avl
 OPER
-A C 0.3
 M
 MN
-0.0
+0.2
 D
-0.380
+1.0
 
 X
 ST

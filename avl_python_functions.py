@@ -27,7 +27,6 @@ def run_avl(avl_path: str, avl_session_path: str, avl_stability_path: str):
 
 
 def read_output(avl_stability_path: str) -> list:
-
     parser = FileParser()
     parser.set_file(avl_stability_path)
     derivative_list = []
@@ -45,7 +44,6 @@ def read_output(avl_stability_path: str) -> list:
 
 
 def generate_geometry(template_path: str, generated_file_path: str, geometry_source_path: str):
-
     aileron_x_c = 0.80
     elevator_x_c = 0.66
     rudder_x_c = 0.62
@@ -61,7 +59,7 @@ def generate_geometry(template_path: str, generated_file_path: str, geometry_sou
     mach = float(tlar.find('cruise_mach').text)
     sref = float(wing.find('area').text)
     bref = float(wing.find('span').text)
-    cref = sref/bref
+    cref = sref / bref
 
     ## WING
     c0 = float(wing.find('root_chord').text)
@@ -90,7 +88,7 @@ def generate_geometry(template_path: str, generated_file_path: str, geometry_sou
     ht_c0 = float(htail.find('root_chord').text)
     # section 1
     ht_xle1 = float(htail.find('tip_x_offset').text)
-    ht_yle1 = float(htail.find('span').text)/2
+    ht_yle1 = float(htail.find('span').text) / 2
     ht_c1 = float(htail.find('tip_chord').text)
 
     ## VERTICAL TAIL
@@ -182,6 +180,35 @@ def generate_geometry(template_path: str, generated_file_path: str, geometry_sou
     return None
 
 
-generate_geometry('resources/geom.avl', 'resources/avl_gen_files/gen_geom.avl', 'resources/data/aircraft.xml')
+def edit_avl_session(avl_session_path: str, geometry_path: str, avl_output_path: str,
+                     mach: float, density: float):
 
-run_avl('resources/executables/avl335', 'resources/avl_session.txt', 'resources/stab.txt')
+    geometry_path = os.path.abspath(geometry_path)
+    avl_output_path = os.path.abspath(avl_output_path)
+
+    session_lines = ['LOAD', geometry_path]
+    session_lines += ['OPER']
+    session_lines += ['M', 'MN', str(mach)]
+    session_lines += ['D', str(density), '']
+    session_lines += ['X', 'ST', avl_output_path, '']
+    session_lines += ['QUIT']
+
+    for _ in session_lines:
+        print(_)
+
+    with open(avl_session_path, 'w') as session:
+        session.writelines('\n'.join(session_lines))
+    return None
+
+
+avl_session_path = 'resources/avl_gen_files/session.txt'
+avl_geometry_path = 'resources/avl_gen_files/gen_geom.avl'
+avl_output_path = 'resources/stab.txt'
+avl_template_path = 'resources/geom.avl'
+avl_exe_path = 'resources/executables/avl335'
+aircraft_data_path = 'resources/data/aircraft.xml'
+
+edit_avl_session(avl_session_path, avl_geometry_path, avl_output_path, 0.2, 1.0)
+generate_geometry(avl_template_path, avl_geometry_path, aircraft_data_path)
+run_avl(avl_exe_path, avl_session_path, avl_output_path)
+
