@@ -5,44 +5,6 @@ from openmdao.utils.file_wrap import InputFileGenerator, FileParser
 import xml.etree.ElementTree as et
 
 
-def run_avl(avl_path: str, avl_session_path: str, avl_stability_path: str):
-    # Creating a string containing all the commands
-    command_string = ""
-    with open(avl_session_path, 'r') as avl_session:
-        lines = avl_session.readlines()
-        for line in lines:
-            command_string += line
-
-    command_string = command_string.encode('ascii')
-
-    # if the output file already exists, it will make the execution crash since AVL will ask if the
-    # file must be overwritten or not, and it will desynchronize the program
-    if os.path.exists(avl_stability_path):
-        os.remove(avl_stability_path)
-
-    avl_ps = sp.Popen([avl_path], stdin=sp.PIPE, stdout=None, stderr=None)
-    avl_ps.communicate(input=command_string)  # sending the commands to AVL
-
-    return None
-
-
-def read_output(avl_stability_path: str) -> list:
-    parser = FileParser()
-    parser.set_file(avl_stability_path)
-    derivative_list = []
-
-    parser.mark_anchor('Cld1')
-    derivative_list.append(parser.transfer_var(0, 6))
-    parser.reset_anchor()
-    parser.mark_anchor('Cmd2')
-    derivative_list.append(parser.transfer_var(0, 10))
-    parser.reset_anchor()
-    parser.mark_anchor('Cnd3')
-    derivative_list.append(parser.transfer_var(0, 12))
-
-    return derivative_list
-
-
 def generate_geometry(template_path: str, generated_file_path: str, geometry_source_path: str):
     aileron_x_c = 0.80
     elevator_x_c = 0.66
@@ -180,11 +142,15 @@ def generate_geometry(template_path: str, generated_file_path: str, geometry_sou
     return None
 
 
-def edit_avl_session(avl_session_path: str, geometry_path: str, avl_output_path: str,
-                     mach: float, density: float):
+def edit_avl_session(avl_session_path: str, geometry_path: str, avl_output_path: str, density: float):
 
     geometry_path = os.path.abspath(geometry_path)
     avl_output_path = os.path.abspath(avl_output_path)
+
+    parser = FileParser()
+    parser.set_file(geometry_path)
+    parser.mark_anchor('#Mach')
+    mach = float(parser.transfer_var(1, 1))
 
     session_lines = ['LOAD', geometry_path]
     session_lines += ['OPER']
@@ -193,22 +159,60 @@ def edit_avl_session(avl_session_path: str, geometry_path: str, avl_output_path:
     session_lines += ['X', 'ST', avl_output_path, '']
     session_lines += ['QUIT']
 
-    for _ in session_lines:
-        print(_)
-
     with open(avl_session_path, 'w') as session:
         session.writelines('\n'.join(session_lines))
     return None
 
 
-avl_session_path = 'resources/avl_gen_files/session.txt'
-avl_geometry_path = 'resources/avl_gen_files/gen_geom.avl'
-avl_output_path = 'resources/stab.txt'
+def run_avl(avl_path: str, avl_session_path: str, geometry_path: str, avl_output_path: str):
+
+    edit_avl_session(avl_session_path, geometry_path, avl_output_path, 1.0)
+
+    # Creating a string containing all the commands
+    command_string = ""
+    with open(avl_session_path, 'r') as avl_session:
+        lines = avl_session.readlines()
+        for line in lines:
+            command_string += line
+
+    command_string = command_string.encode('ascii')
+
+    # if the output file already exists, it will make the execution crash since AVL will ask if the
+    # file must be overwritten or not, and it will desynchronize the program
+    if os.path.exists(avl_output_path):
+        os.remove(avl_output_path)
+
+    avl_ps = sp.Popen([avl_path], stdin=sp.PIPE, stdout=None, stderr=None)
+    avl_ps.communicate(input=command_string)  # sending the commands to AVL
+
+    return None
+
+
+def read_output(avl_stability_path: str) -> list:
+    parser = FileParser()
+    parser.set_file(avl_stability_path)
+    derivative_list = []
+
+    parser.mark_anchor('Cld1')
+    derivative_list.append(parser.transfer_var(0, 6))
+    parser.reset_anchor()
+    parser.mark_anchor('Cmd2')
+    derivative_list.append(parser.transfer_var(0, 10))
+    parser.reset_anchor()
+    parser.mark_anchor('Cnd3')
+    derivative_list.append(parser.transfer_var(0, 12))
+
+    return derivative_list
+
+
+avl_session_path = 'avl_gen_files/session.txt'
+avl_geometry_path = 'avl_gen_files/gen_geom.avl'
+avl_output_path = 'avl_gen_files/stab.txt'
 avl_template_path = 'resources/geom.avl'
 avl_exe_path = 'resources/executables/avl335'
 aircraft_data_path = 'resources/data/aircraft.xml'
 
-edit_avl_session(avl_session_path, avl_geometry_path, avl_output_path, 0.2, 1.0)
+
 generate_geometry(avl_template_path, avl_geometry_path, aircraft_data_path)
-run_avl(avl_exe_path, avl_session_path, avl_output_path)
+run_avl(avl_exe_path, avl_session_path, avl_geometry_path, avl_output_path)
 
