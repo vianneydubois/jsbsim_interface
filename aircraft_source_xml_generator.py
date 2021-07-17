@@ -1,7 +1,8 @@
 from xml.etree.ElementTree import Element, SubElement, tostring, Comment
 from xml.dom import minidom
 
-tlar_list = [['approach_speed', 33.33, 'm/s']]
+tlar_list = [['approach_speed', 33.33, 'm/s'],
+             ['cruise_mach', 0.2, '']]
 
 wing = ['wing',
         [['area', 16.17, 'm**2'],
@@ -18,21 +19,33 @@ fuselage = ['fuselage',
             ]
 horizontal_tail = ['horizontal_tail',
                    [['area', 3.83, 'm**2'],
+                    ['x_le_offset', 4.64, 'm'],
+                    ['z_le_offset', -0.46, 'm'],
+                    ['span', 3.56, 'm'],
+                    ['root_chord', 1.40, 'm'],
+                    ['tip_chord', 0.75, 'm'],
+                    ['tip_x_offset', 0.28, 'm'],
                     ['arm', 5.27, 'm']]
                    ]
 vertical_tail = ['vertical_tail',
-                 [['area', 1.085, 'm**2'],
+                 [['area', 1.85, 'm**2'],
+                  ['x_le_offset', 4.07, 'm'],
+                  ['z_le_offset', -0.29, 'm'],
+                  ['span', 1.33, 'm'],
+                  ['root_chord', 2.0, 'm'],
+                  ['tip_chord', 0.79, 'm'],
+                  ['tip_x_offset', 1.62, 'm'],
                   ['arm', 4.52, 'm']]
                  ]
 propulsion_geometry = ['propulsion',
-                 [['layout', 0, ''],
-                  ['count', 1, '']]
-                 ]
+                       [['layout', 0, ''],
+                        ['count', 1, '']]
+                       ]
 extra = ['extra',
-                 [['flaps', 1, ''],
-                  ['spoilers', 0, ''],
-                  ['chute', 0, '']]
-                 ]
+         [['flaps', 1, ''],
+          ['spoilers', 0, ''],
+          ['chute', 0, '']]
+         ]
 geometry_list = [fuselage,
                  wing,
                  horizontal_tail,
@@ -45,18 +58,18 @@ mass_aircraft = ['aircraft',
                   ['OWE', 744, 'kg']]
                  ]
 inertia = ['inertia',
-        [['Ixx', 1285, 'kg m**2'],
-         ['Iyy', 1825, 'kg m**2'],
-         ['Izz', 2667, 'kg m**2']]
-        ]
+           [['Ixx', 1285, 'kg m**2'],
+            ['Iyy', 1825, 'kg m**2'],
+            ['Izz', 2667, 'kg m**2']]
+           ]
 weight_list = [mass_aircraft,
                inertia]
 
 engine = ['engine',
-              [['type', 0, ''],
-               ['power', 134, 'kW'],
-               ['max_rpm', 2700, 'rpm']]
-              ]
+          [['type', 0, ''],
+           ['power', 134, 'kW'],
+           ['max_rpm', 2700, 'rpm']]
+          ]
 propeller = ['propeller',
              [['diameter', 2.03, 'm'],
               ['fixed_pitch', 1.0, '']]
@@ -68,8 +81,8 @@ root = Element('FASTOAD_model')
 data = SubElement(root, 'data')
 
 landing_gear_list = [['retractable', 0.0, ''],
-                ['type', 0, ''],
-                ['taildragger', 0, '']]
+                     ['type', 0, ''],
+                     ['taildragger', 0, '']]
 
 tlar = SubElement(data, 'TLAR')
 geometry = SubElement(data, 'geometry')
@@ -107,7 +120,6 @@ for propu_elt in propulsion_list:
         sub_child = SubElement(child, child_elt[0])
         sub_child.text = str(child_elt[1])
         sub_child.set('units', child_elt[2])
-
 
 xml_string = minidom.parseString(tostring(root)).toprettyxml()
 print(xml_string)

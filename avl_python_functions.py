@@ -2,6 +2,7 @@ import os
 import subprocess as sp
 import numpy as np
 from openmdao.utils.file_wrap import InputFileGenerator, FileParser
+import xml.etree.ElementTree as et
 
 
 def run_avl(avl_path: str, avl_session_path: str, avl_stability_path: str):
@@ -41,3 +42,146 @@ def read_output(avl_stability_path: str) -> list:
     derivative_list.append(parser.transfer_var(0, 12))
 
     return derivative_list
+
+
+def generate_geometry(template_path: str, generated_file_path: str, geometry_source_path: str):
+
+    aileron_x_c = 0.80
+    elevator_x_c = 0.66
+    rudder_x_c = 0.62
+
+    geometry_source = et.parse(geometry_source_path)
+    data = geometry_source.getroot().find('data')
+    geometry = data.find('geometry')
+    wing = geometry.find('wing')
+    htail = geometry.find('horizontal_tail')
+    vtail = geometry.find('vertical_tail')
+    tlar = data.find('TLAR')
+
+    mach = float(tlar.find('cruise_mach').text)
+    sref = float(wing.find('area').text)
+    bref = float(wing.find('span').text)
+    cref = sref/bref
+
+    ## WING
+    c0 = float(wing.find('root_chord').text)
+    c2 = float(wing.find('tip_chord').text)
+    sweep_25 = np.deg2rad(float(wing.find('sweep_25').text))
+    sweep_0 = np.arctan(np.tan(sweep_25) + 1 / 4 / bref / 2 * (c0 - c2))
+    # section 0
+    xle0 = 0
+    yle0 = 0
+    # section 1 - aileron inward limit
+    aileron_in_limit = 0.8
+    yle1 = aileron_in_limit * bref / 2
+    xle1 = yle1 * np.tan(sweep_0)
+    c1 = c0 + 0.8 * (c2 - c0)
+    # section 2
+    yle2 = bref / 2
+    xle2 = yle2 * np.tan(sweep_0)
+    c2 = float(wing.find('tip_chord').text)
+
+    ## HORIZONTAL TAIL
+    x_translate_ht = float(htail.find('x_le_offset').text)
+    z_translate_ht = float(htail.find('z_le_offset').text)
+    # section 0
+    ht_xle0 = 0
+    ht_yle0 = 0
+    ht_c0 = float(htail.find('root_chord').text)
+    # section 1
+    ht_xle1 = float(htail.find('tip_x_offset').text)
+    ht_yle1 = float(htail.find('span').text)/2
+    ht_c1 = float(htail.find('tip_chord').text)
+
+    ## VERTICAL TAIL
+    x_translate_vt = float(vtail.find('x_le_offset').text)
+    z_translate_vt = float(vtail.find('z_le_offset').text)
+    # section 0
+    vt_xle0 = 0
+    vt_zle0 = 0
+    vt_c0 = float(vtail.find('root_chord').text)
+    # section 1
+    vt_xle1 = float(vtail.find('tip_x_offset').text)
+    vt_zle1 = float(vtail.find('span').text)
+    vt_c1 = float(vtail.find('tip_chord').text)
+
+    ## Completing the template file
+    parser = InputFileGenerator()
+    parser.set_template_file(template_path)
+    parser.set_generated_file(generated_file_path)
+
+    parser.mark_anchor("#Mach")
+    parser.transfer_var(float(mach), 1, 1)
+    parser.reset_anchor()
+
+    parser.mark_anchor("#Sref")
+    parser.transfer_var(float(sref), 1, 1)
+    parser.transfer_var(float(cref), 1, 2)
+    parser.transfer_var(float(bref), 1, 3)
+    parser.reset_anchor()
+
+    # WING
+    # section 0
+    parser.mark_anchor("#Xle")
+    parser.transfer_var(float(c0), 1, 4)
+    # section 1
+    parser.mark_anchor("#Xle")
+    parser.transfer_var(float(xle1), 1, 1)
+    parser.transfer_var(float(yle1), 1, 2)
+    parser.transfer_var(float(c1), 1, 4)
+    parser.mark_anchor("CONTROL")
+    parser.transfer_var(float(aileron_x_c), 1, 3)
+    # section 2
+    parser.mark_anchor("#Xle")
+    parser.transfer_var(float(xle2), 1, 1)
+    parser.transfer_var(float(yle2), 1, 2)
+    parser.transfer_var(float(c2), 1, 4)
+    parser.mark_anchor("CONTROL")
+    parser.transfer_var(float(aileron_x_c), 1, 3)
+
+    # HORIZONTAL TAIL
+    parser.reset_anchor()
+    parser.mark_anchor('Stab')
+    parser.mark_anchor('TRANSLATE')
+    parser.transfer_var(float(x_translate_ht), 1, 1)
+    parser.transfer_var(float(z_translate_ht), 1, 3)
+    # section 0
+    parser.mark_anchor("#Xle")
+    parser.transfer_var(float(ht_c0), 1, 4)
+    parser.mark_anchor("CONTROL")
+    parser.transfer_var(float(elevator_x_c), 1, 3)
+    # section 1
+    parser.mark_anchor("#Xle")
+    parser.transfer_var(float(ht_xle1), 1, 1)
+    parser.transfer_var(float(ht_yle1), 1, 2)
+    parser.transfer_var(float(ht_c1), 1, 4)
+    parser.mark_anchor("CONTROL")
+    parser.transfer_var(float(elevator_x_c), 1, 3)
+
+    # VERTICAL TAIL
+    parser.reset_anchor()
+    parser.mark_anchor('Fin')
+    parser.mark_anchor('TRANSLATE')
+    parser.transfer_var(float(x_translate_vt), 1, 1)
+    parser.transfer_var(float(z_translate_vt), 1, 3)
+    # section 0
+    parser.mark_anchor("#Xle")
+    parser.transfer_var(float(vt_c0), 1, 4)
+    parser.mark_anchor("CONTROL")
+    parser.transfer_var(float(rudder_x_c), 1, 3)
+    # section 1
+    parser.mark_anchor("#Xle")
+    parser.transfer_var(float(vt_xle1), 1, 1)
+    parser.transfer_var(float(vt_zle1), 1, 3)
+    parser.transfer_var(float(vt_c1), 1, 4)
+    parser.mark_anchor("CONTROL")
+    parser.transfer_var(float(rudder_x_c), 1, 3)
+
+    parser.generate()
+
+    return None
+
+
+generate_geometry('resources/geom.avl', 'resources/avl_gen_files/gen_geom.avl', 'resources/data/aircraft.xml')
+
+run_avl('resources/executables/avl335', 'resources/avl_session.txt', 'resources/stab.txt')

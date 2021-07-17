@@ -18,11 +18,11 @@ def generate_geometry(input_template_path: str, input_generated_path: str,
     yle0 = 0
     c0 = 5.968267075021899
     # section 2
-    yle2 = bref/2
+    yle2 = bref / 2
     xle2 = yle2 * np.tan(sweep_0)
     c2 = 1.6599009162290415
     # section 1
-    yle1 = 0.8*bref/2
+    yle1 = 0.8 * bref / 2
     xle1 = yle1 * np.tan(sweep_0)
     c1 = c0 + 0.8 * (c2 - c0)
 
@@ -49,7 +49,6 @@ def generate_geometry(input_template_path: str, input_generated_path: str,
     vt_xle1 = 5.724
     vt_zle1 = 6.70056
     vt_c1 = 1.77262
-
 
     parser = InputFileGenerator()
     parser.set_template_file(input_template_path)
@@ -146,8 +145,8 @@ def run_avl(avl_path: str, avl_session_path: str, avl_stability_path: str):
 
 def read_output(avl_stability_path: str) -> list:
     # reading the output file path from the avl_session file
-    #with open(avl_session_path, 'r') as avl_session:
-     #   output_stab_path = avl_session.readlines()[6][:-1]  # removing the '\n' character
+    # with open(avl_session_path, 'r') as avl_session:
+    #   output_stab_path = avl_session.readlines()[6][:-1]  # removing the '\n' character
 
     parser = FileParser()
     parser.set_file(avl_stability_path)
@@ -173,7 +172,6 @@ def compute_range(avl_path: str,
                   aileron_range: list,
                   elevator_range: list,
                   rudder_range: list) -> list:
-
     # number of AVL run to perform
     n_aileron = len(aileron_range)
     n_elevator = len(elevator_range)
@@ -186,7 +184,6 @@ def compute_range(avl_path: str,
         if n < run_number:
             list += [list[-1]] * (run_number - n)
 
-
     control_derivatives = np.zeros((6, run_number))
     control_derivatives[::2] = aileron_range, elevator_range, rudder_range
 
@@ -194,6 +191,6 @@ def compute_range(avl_path: str,
         generate_geometry(input_template_path, input_generated_path,
                           aileron_range[i], elevator_range[i], rudder_range[i])
         run_avl(avl_path, avl_session_path, avl_stability_path)
-        control_derivatives[1::2, i] =  read_output(avl_stability_path)
+        control_derivatives[1::2, i] = read_output(avl_stability_path)
 
     return control_derivatives

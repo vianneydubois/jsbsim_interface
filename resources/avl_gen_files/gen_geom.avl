@@ -1,0 +1,121 @@
+AVL_PYTHON_TEST
+
+#Mach
+ 0.2
+
+#IYsym   IZsym   Zsym
+ 0       0       0.0
+
+#Sref    Cref    Bref
+16.17      1.47     11.0
+
+#Xref    Yref    Zref
+0.0     0.0     0.0
+
+#--------------------------------------------------
+SURFACE 
+Wing 
+!Nchordwise  Cspace  Nspanwise  Sspace
+12           1.0     26         -1.1
+
+COMPONENT 
+1
+
+YDUPLICATE 
+0.0
+
+ANGLE
+0.0
+
+SCALE
+1.0   1.0   1.0
+
+TRANSLATE
+0.0  0.0  0.0
+
+SECTION
+#Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace
+ 0.0    0.0    0.0     1.66  0.0
+AFILE
+/Users/vianneydubois/PycharmProjects/avl_python/resources/F15-15-mod.dat
+
+SECTION
+#Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace
+0.028      4.4   0.0      1.212    0.0
+AFILE
+/Users/vianneydubois/PycharmProjects/avl_python/resources/F15-12-mod.dat
+CONTROL
+aileron -1.0  0.8  0. 0. 0.  -1
+
+SECTION
+#Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace
+0.03499999999999999     5.5    0.0     1.1    0.0
+AFILE
+/Users/vianneydubois/PycharmProjects/avl_python/resources/F15-11-mod.dat
+CONTROL
+aileron -1.0  0.8  0. 0. 0.  -1
+
+#--------------------------------------------------
+SURFACE
+Stab 
+#Nchordwise  Cspace  Nspanwise  Sspace
+6            1.0     15         -1.1
+
+COMPONENT
+1
+
+YDUPLICATE 
+0.0
+
+SCALE
+1.0  1.0  1.0
+
+TRANSLATE 
+4.64  0.0  -0.46
+
+SECTION
+#Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace
+0.0     0.0    0.0     1.4    0.0
+NACA
+0010
+CONTROL
+elevator  1.0  0.66    0. 0. 0.  1
+
+SECTION
+#Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace
+0.28     1.78    0.0     0.75    0.0
+NACA
+0010
+CONTROL
+elevator  1.0  0.66    0. 0. 0.  1
+  
+#--------------------------------------------------
+SURFACE
+Fin
+#Nchordwise  Cspace   Nspanwise  Sspace
+7            1.0      11          1.0
+
+COMPONENT
+1
+
+SCALE
+1.0   1.0  1.0
+
+TRANSLATE
+4.07  0.0   -0.29
+
+SECTION
+#Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace
+ 0.0    0.0    0.0     2.0    0.    
+NACA
+0010
+CONTROL
+rudder  1.0  0.62   0. 0. 0.  1
+
+SECTION
+#Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace
+1.62    0.0    1.33     0.79    0.0
+NACA
+0010
+CONTROL
+rudder  1.0  0.62   0. 0. 0.  1  
