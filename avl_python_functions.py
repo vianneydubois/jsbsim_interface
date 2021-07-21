@@ -5,10 +5,12 @@ from openmdao.utils.file_wrap import InputFileGenerator, FileParser
 import xml.etree.ElementTree as et
 
 
-def generate_geometry(template_path: str, generated_file_path: str, geometry_source_path: str):
-    aileron_x_c = 0.80
-    elevator_x_c = 0.66
-    rudder_x_c = 0.62
+def generate_geometry(template_path: str, generated_file_path: str, geometry_source_path: str, fcs_x_c: list):
+    #aileron_x_c = 0.80
+    #elevator_x_c = 0.66
+    #rudder_x_c = 0.62
+
+    aileron_x_c, elevator_x_c, rudder_x_c = fcs_x_c
 
     geometry_source = et.parse(geometry_source_path)
     data = geometry_source.getroot().find('data')
