@@ -9,6 +9,6 @@ D
 
 X
 ST
-/Users/vianneydubois/PycharmProjects/jsbsim_interface/avl_gen_files/stab.txt
+/Users/vianneydubois/PycharmProjects/jsbsim_interface/avl_gen_files/out.txt
 
 QUIT

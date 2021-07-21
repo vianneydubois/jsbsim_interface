@@ -205,14 +205,14 @@ def read_output(avl_stability_path: str) -> list:
     return derivative_list
 
 
-avl_session_path = 'avl_gen_files/session.txt'
-avl_geometry_path = 'avl_gen_files/gen_geom.avl'
-avl_output_path = 'avl_gen_files/stab.txt'
-avl_template_path = 'resources/geom.avl'
-avl_exe_path = 'resources/executables/avl335'
-aircraft_data_path = 'resources/data/aircraft.xml'
-
-
-generate_geometry(avl_template_path, avl_geometry_path, aircraft_data_path)
-run_avl(avl_exe_path, avl_session_path, avl_geometry_path, avl_output_path)
+# avl_session_path = 'avl_gen_files/session.txt'
+# avl_geometry_path = 'avl_gen_files/gen_geom.avl'
+# avl_output_path = 'avl_gen_files/stab.txt'
+# avl_template_path = 'resources/geom.avl'
+# avl_exe_path = 'resources/executables/avl335'
+# aircraft_data_path = 'resources/data/aircraft.xml'
+#
+#
+# generate_geometry(avl_template_path, avl_geometry_path, aircraft_data_path)
+# run_avl(avl_exe_path, avl_session_path, avl_geometry_path, avl_output_path)
 

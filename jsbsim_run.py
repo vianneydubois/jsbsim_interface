@@ -4,6 +4,7 @@ import xml.etree.ElementTree as et
 
 
 def edit_jsbsim_script(script_name: str, aircraft_name: str, init_file_name: str):
+    # updates the script with the aircraft name and the initialize file
     jsbsim_script_path = os.path.join('aircraft', aircraft_name, 'scripts', script_name + '.xml')
     script = et.parse(jsbsim_script_path)
     root = script.getroot()
@@ -27,6 +28,7 @@ def edit_jsbsim_script(script_name: str, aircraft_name: str, init_file_name: str
 
 
 def run_jsbsim(jsbsim_source_path: str, aircraft_name: str, script_name: str):
+    # runs jsbsim with the aircraft name and the selected script
     jsbsim_script_path = os.path.join('aircraft', aircraft_name, 'scripts', script_name + '.xml')
     command = 'python3 '
     command += jsbsim_source_path
@@ -36,6 +38,7 @@ def run_jsbsim(jsbsim_source_path: str, aircraft_name: str, script_name: str):
 
 
 def copy_script_file(desired_script_name: str, aircraft_name: str):
+    # copy the script and init files in the aircraft folder in vue of jsbsim run
 
     # create a 'scripts' folder
     scripts_folder_path = os.path.join('aircraft', aircraft_name, 'scripts')
@@ -68,21 +71,21 @@ def copy_script_file(desired_script_name: str, aircraft_name: str):
 
 
 def remove_script_file(aircraft_name: str):
-    # removes the 'scripts' folder
+    # removes the 'scripts' folder created in the aircraft folder prior to jsbsim run
     scripts_folder_path = os.path.join('aircraft', aircraft_name, 'scripts')
     shutil.rmtree(scripts_folder_path)
     return
 
 
-AIRCRAFT_NAME = 'c172'
-INIT_FILE_NAME = 'airborne'
-SCRIPT_FILE_NAME = 'roll'
-
-JSBSIM_SOURCE_PATH = os.path.join('resources', 'JSBSim.py')
-
-jsbsim_script_path = os.path.join('aircraft', AIRCRAFT_NAME, 'scripts', SCRIPT_FILE_NAME + '.xml')
-
-copy_script_file(SCRIPT_FILE_NAME, AIRCRAFT_NAME)
-edit_jsbsim_script(SCRIPT_FILE_NAME, AIRCRAFT_NAME, INIT_FILE_NAME)
-run_jsbsim(JSBSIM_SOURCE_PATH, AIRCRAFT_NAME, SCRIPT_FILE_NAME)
-remove_script_file(AIRCRAFT_NAME)
+# AIRCRAFT_NAME = 'c172'
+# INIT_FILE_NAME = 'airborne'
+# SCRIPT_FILE_NAME = 'yaw'
+#
+# JSBSIM_SOURCE_PATH = os.path.join('resources', 'JSBSim.py')
+#
+# jsbsim_script_path = os.path.join('aircraft', AIRCRAFT_NAME, 'scripts', SCRIPT_FILE_NAME + '.xml')
+#
+# copy_script_file(SCRIPT_FILE_NAME, AIRCRAFT_NAME)
+# edit_jsbsim_script(SCRIPT_FILE_NAME, AIRCRAFT_NAME, INIT_FILE_NAME)
+# run_jsbsim(JSBSIM_SOURCE_PATH, AIRCRAFT_NAME, SCRIPT_FILE_NAME)
+# remove_script_file(AIRCRAFT_NAME)
