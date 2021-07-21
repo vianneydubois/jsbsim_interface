@@ -4,6 +4,7 @@ import aeromatic_run as aeromatic
 import avl_python_functions as avl
 import avl_jsbsim_coefficient as avl_jsbsim
 import jsbsim_run as jsbsim
+import post_processing as pp
 import os
 
 
@@ -31,10 +32,19 @@ def compute(desired_script_name, init_file_name, xml_file_path, aircraft_name):
     jsbsim.remove_script_file(aircraft_name)
 
     # 5 : post processing
-    return None
+    result = False
+    if desired_script_name == 'yaw':
+        result = pp.process_rudder(aircraft_name, 15, 7)
+    elif desired_script_name == 'roll':
+        result = pp.process_roll(aircraft_name, -60, 11)
+    return result
 
 
 aircraft_name = 'new_cessna'
 aircraft_xml_source = 'resources/data/aircraft.xml'
 
-compute('roll', 'airborne', aircraft_xml_source, aircraft_name)
+print(compute('roll', 'airborne', aircraft_xml_source, aircraft_name))
+
+
+# folder for avl template and aeromatic script
+# executables for windows : OS auto detect
