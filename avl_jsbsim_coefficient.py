@@ -66,9 +66,3 @@ def integrate_avl_coef(avl_output_path: str, jsbsim_config_path: str):
 
     return None
 
-
-
-# avl_output_path = 'avl_gen_files/stab.txt'
-# jsbsim_config_path = 'aircraft/c172/c172.xml'
-#
-# integrate_avl_coef(avl_output_path, jsbsim_config_path)
