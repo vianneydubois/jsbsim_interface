@@ -2,7 +2,7 @@
 <fdm_config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="c172" version="2.0" release="ALPHA" xsi:noNamespaceSchemaLocation="http://jsbsim.sourceforge.net/JSBSim.xsd">
 	<fileheader>
 		<author> Aeromatic v 3.3.12 </author>
-		<filecreationdate> 09 Jul 2021 </filecreationdate>
+		<filecreationdate> 28 Jul 2021 </filecreationdate>
 		<version>$Revision: 1.80 $</version>
 		<description> Models a c172. </description>
 	</fileheader>
@@ -13,7 +13,7 @@
 		<chord unit="FT">     4.59 </chord>
 		<htailarea unit="FT2">    41.23 </htailarea>
 		<htailarm unit="FT">    17.29 </htailarm>
-		<vtailarea unit="FT2">   11.68 </vtailarea>
+		<vtailarea unit="FT2">   19.91 </vtailarea>
 		<vtailarm unit="FT">    14.83 </vtailarm>
 		<location name="AERORP" unit="IN">
 			<x>   118.50 </x>
@@ -35,15 +35,15 @@
 		<ixx unit="SLUG*FT2">    947.77 </ixx>
 		<iyy unit="SLUG*FT2">   1346.05 </iyy>
 		<izz unit="SLUG*FT2">   1967.08 </izz>
-		<emptywt unit="LBS">    165.38 </emptywt>
+		<emptywt unit="LBS">   1640.52 </emptywt>
 		<location name="CG" unit="IN">
 			<x>   106.77 </x>
 			<y>     0.00 </y>
 			<z>    -8.15 </z>
 		</location>
 		<pointmass name="Payload">
-			<description> 2182.95 LBS should bring model up to entered max weight </description>
-			<weight unit="LBS"> 1091.47 </weight>
+			<description> 533.09 LBS should bring model up to entered max weight </description>
+			<weight unit="LBS"> 266.54 </weight>
 			<location name="POINTMASS" unit="IN">
 				<x>   106.77 </x>
 				<y>     0.00 </y>
@@ -84,8 +84,8 @@
 				<y>     0.00 </y>
 				<z>    -8.15 </z>
 			</location>
-			<capacity unit="LBS"> 203.96 </capacity>
-			<contents unit="LBS"> 101.98 </contents>
+			<capacity unit="LBS"> 188.79 </capacity>
+			<contents unit="LBS"> 94.39 </contents>
 		</tank>
 		<tank type="FUEL" number="1">
 			<location unit="IN">
@@ -93,8 +93,8 @@
 				<y>     0.00 </y>
 				<z>    -8.15 </z>
 			</location>
-			<capacity unit="LBS"> 203.96 </capacity>
-			<contents unit="LBS"> 101.98 </contents>
+			<capacity unit="LBS"> 188.79 </capacity>
+			<contents unit="LBS"> 94.39 </contents>
 		</tank>
 	</propulsion>
 	<ground_reactions>
@@ -107,8 +107,8 @@
 			<static_friction>  0.80 </static_friction>
 			<dynamic_friction> 0.50 </dynamic_friction>
 			<rolling_friction> 0.02 </rolling_friction>
-			<spring_coeff unit="LBS/FT">     826.88 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC"> 413.44 </damping_coeff>
+			<spring_coeff unit="LBS/FT">     765.36 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC"> 382.68 </damping_coeff>
 			<max_steer unit="DEG"> 5.00 </max_steer>
 			<brake_group> NONE </brake_group>
 			<retractable> 0 </retractable>
@@ -122,8 +122,8 @@
 			<static_friction>  0.80 </static_friction>
 			<dynamic_friction> 0.50 </dynamic_friction>
 			<rolling_friction> 0.02 </rolling_friction>
-			<spring_coeff unit="LBS/FT">     2756.25 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC"> 1378.12 </damping_coeff>
+			<spring_coeff unit="LBS/FT">     2551.18 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC"> 1275.59 </damping_coeff>
 			<max_steer unit="DEG">0</max_steer>
 			<brake_group> LEFT </brake_group>
 			<retractable> 0 </retractable>
@@ -137,8 +137,8 @@
 			<static_friction>  0.80 </static_friction>
 			<dynamic_friction> 0.50 </dynamic_friction>
 			<rolling_friction> 0.02 </rolling_friction>
-			<spring_coeff unit="LBS/FT">     2756.25 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC"> 1378.12 </damping_coeff>
+			<spring_coeff unit="LBS/FT">     2551.18 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC"> 1275.59 </damping_coeff>
 			<max_steer unit="DEG">0</max_steer>
 			<brake_group> RIGHT </brake_group>
 			<retractable> 0 </retractable>
@@ -151,8 +151,8 @@
 			</location>
 			<static_friction>  1 </static_friction>
 			<dynamic_friction> 1 </dynamic_friction>
-			<spring_coeff unit="LBS/FT">      2756.25 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC"> 2756.25 </damping_coeff>
+			<spring_coeff unit="LBS/FT">      2551.18 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC"> 2551.18 </damping_coeff>
 		</contact>
 		<contact type="STRUCTURE" name="RIGHT_WING">
 			<location unit="IN">
@@ -162,8 +162,8 @@
 			</location>
 			<static_friction>  1 </static_friction>
 			<dynamic_friction> 1 </dynamic_friction>
-			<spring_coeff unit="LBS/FT">      2756.25 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC"> 2756.25 </damping_coeff>
+			<spring_coeff unit="LBS/FT">      2551.18 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC"> 2551.18 </damping_coeff>
 		</contact>
 	</ground_reactions>
 	<flight_control name="FCS: c172">
@@ -333,9 +333,9 @@
 						<tableData>
                      0.0     60.0
               -0.23  0.000   0.000
-               0.00  0.071   0.189
-               0.31  0.334   0.890
-               0.62  0.000   0.000
+               0.00  0.066   0.175
+               0.28  0.309   0.824
+               0.57  0.000   0.000
             </tableData>
 					</table>
 				</product>
@@ -352,11 +352,11 @@
               -1.22 -0.5750
               -1.05 -0.7746
               -0.88 -0.8945
-              -0.67 -0.5933
-              -0.35 -1.4833
-               0.00  0.3999
-               0.27  1.8833
-               0.60  0.9933
+              -0.67 -0.5492
+              -0.32 -1.3730
+               0.00  0.3702
+               0.25  1.7431
+               0.60  0.9194
                0.88  1.1055
                1.05  0.9574
                1.22  0.7106
@@ -410,7 +410,7 @@
 				<product>
 					<property>aero/qbar-psf</property>
 					<property>metrics/Sw-sqft</property>
-					<value> 0.0219 </value>
+					<value> 0.0199 </value>
 				</product>
 			</function>
 			<function name="aero/force/Drag_alpha">
@@ -422,9 +422,9 @@
 						<independentVar lookup="row">aero/alpha-rad</independentVar>
 						<tableData>
              -1.57    1.4099
-             -0.27    0.0532
+             -0.25    0.0456
               0.00    0.0000
-              0.27    0.0532
+              0.25    0.0456
               1.57    1.4099
             </tableData>
 					</table>
@@ -508,7 +508,7 @@
 					<property>aero/qbar-psf</property>
 					<property>metrics/Sw-sqft</property>
 					<property>aero/beta-rad</property>
-					<value> -0.3108 </value>
+					<value> -0.5300 </value>
 				</product>
 			</function>
 			<function name="aero/force/Side_roll_rate">
@@ -521,10 +521,10 @@
 					<table>
 						<independentVar lookup="row">aero/Re</independentVar>
 						<tableData>
-                 2460575   0.3467
-                 2706632   0.0295
-                 3690862   0.0131
-                 4928515   0.0074
+                 2460575   0.3209
+                 2706632   0.0273
+                 3690862   0.0122
+                 4928515   0.0068
              </tableData>
 					</table>
 				</product>
@@ -536,7 +536,7 @@
 					<property>metrics/Sw-sqft</property>
 					<property>aero/bi2vel</property>
 					<property>velocities/r-aero-rad_sec</property>
-					<value> 0.2555 </value>
+					<value> 0.4356 </value>
 				</product>
 			</function>
 			<function name="aero/force/Side_rudder">
@@ -545,7 +545,7 @@
 					<property>aero/qbar-psf</property>
 					<property>metrics/Sw-sqft</property>
 					<property>fcs/rudder-pos-rad</property>
-					<value> 0.0944 </value>
+					<value> 0.1609 </value>
 				</product>
 			</function>
 		</axis>
@@ -563,9 +563,9 @@
 						<tableData>
                      0.0     60.0
               -0.02  0.000   0.000
-               0.00 -0.063  -0.169
-               0.31 -0.298  -0.794
-               0.40  0.000   0.000
+               0.00 -0.059  -0.156
+               0.28 -0.276  -0.735
+               0.37  0.000   0.000
             </tableData>
 					</table>
 				</product>
@@ -644,8 +644,8 @@
 						<independentVar lookup="column">aero/Re</independentVar>
 						<tableData>
                           2460575  2706632  3690862  4928515
-                 -0.0349  -0.4642  -0.0882  -0.0687  -0.0619
-                  0.3491  -0.4642  -0.0882  -0.0687  -0.0619
+                 -0.0349  -0.4343  -0.0862  -0.0682  -0.0619
+                  0.3491  -0.4343  -0.0862  -0.0682  -0.0619
              </tableData>
 					</table>
 				</product>
@@ -658,7 +658,7 @@
 					<property>metrics/bw-ft</property>
 					<property>aero/bi2vel</property>
 					<property>velocities/p-aero-rad_sec</property>
-					<value> -0.5279 </value>
+					<value> -0.5097 </value>
 				</product>
 			</function>
 			<function name="aero/moment/Roll_yaw">
@@ -674,8 +674,8 @@
 						<independentVar lookup="column">aero/Re</independentVar>
 						<tableData>
                           2460575  2706632  3690862  4928515
-                 -0.0349   0.0458   0.0458   0.0458   0.0458
-                  0.3491   4.7011   0.5642   0.5642   0.5642
+                 -0.0349   0.0333   0.0333   0.0333   0.0333
+                  0.3491   4.3458   0.5518   0.5518   0.5518
              </tableData>
 					</table>
 				</product>
@@ -734,7 +734,7 @@
 					<property>metrics/Sw-sqft</property>
 					<property>metrics/bw-ft</property>
 					<property>aero/beta-rad</property>
-					<value> 0.0614 </value>
+					<value> 0.1046 </value>
 				</product>
 			</function>
 			<function name="aero/moment/Yaw_roll_rate">
@@ -748,10 +748,10 @@
 					<table>
 						<independentVar lookup="row">aero/Re</independentVar>
 						<tableData>
-                 2460575  -0.1424
-                 2706632  -0.0121
-                 3690862  -0.0054
-                 4928515  -0.0030
+                 2460575  -0.1319
+                 2706632  -0.0112
+                 3690862  -0.0050
+                 4928515  -0.0028
              </tableData>
 					</table>
 				</product>
@@ -764,7 +764,7 @@
 					<property>metrics/bw-ft</property>
 					<property>aero/bi2vel</property>
 					<property>velocities/r-aero-rad_sec</property>
-					<value> -0.0662 </value>
+					<value> -0.1000 </value>
 				</product>
 			</function>
 			<function name="aero/moment/Yaw_rudder">

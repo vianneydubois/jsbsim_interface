@@ -1,7 +1,7 @@
 /Users/vianneydubois/PycharmProjects/jsbsim_interface/aircraft
 yes
 yes
-new_cessna
+c172
 no
 1
 0
@@ -26,13 +26,13 @@ no
 1.85
 4.52
 yes
-new_cessna_engine
+c172_engine
 1
 0
 0
 134
 2700
-new_cessna_prop
+c172_prop
 2.03
 yes
 yes

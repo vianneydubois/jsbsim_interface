@@ -15,7 +15,7 @@ def process_rudder(aircraft_name, delta_psi, t_lim):
 
     df1_Phi_lim = df1[df1['Psi deg'] >= psi_lim]
 
-    df1_t_lim = df1_Phi_lim.loc[:, 'Time'].iat[0]
+    df1_t_lim = df1_Phi_lim.loc[:, 'Time'].iat[0] - 1  # -1.0 sec because manoeuvre starts at t + 1.0 s
     print(f't_yaw : {df1_t_lim}')
 
     return df1_t_lim < t_lim
@@ -33,7 +33,7 @@ def process_roll(aircraft_name, delta_phi, t_lim):
 
     df1_Phi_lim = df1[df1['Phi deg'] <= psi_lim]
 
-    df1_t_lim = df1_Phi_lim.loc[:, 'Time'].iat[0]
+    df1_t_lim = df1_Phi_lim.loc[:, 'Time'].iat[0] - 1  # -1.0 sec because manoeuvre starts at t + 1.0 s
     print(f't_roll : {df1_t_lim}')
 
     return df1_t_lim < t_lim

@@ -40,12 +40,13 @@ def compute(desired_script_name, init_file_name, xml_file_path, aircraft_name, f
     return result
 
 
-aircraft_name = 'new_cessna'
-aircraft_xml_source = 'resources/data/aircraft.xml'
+aircraft_name = 'c172'
+script = 'roll'
+init = 'airborne'
+aircraft_xml_source = os.path.join('resources', 'data', 'aircraft.xml')
 fcs_x_c = [0.8, 0.66, 0.62]  # aileron, elevator, rudder
 
-print(compute('roll', 'airborne', aircraft_xml_source, aircraft_name, fcs_x_c))
-
+print(compute(script, init, aircraft_xml_source, aircraft_name, fcs_x_c))
 
 # folder for avl template and aeromatic script
 # executables for windows : OS auto detect
