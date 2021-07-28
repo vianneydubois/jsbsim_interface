@@ -137,13 +137,13 @@ def generate_script(aeromatic_script_path: str, xml_file_path: str, aircraft_nam
     script.close()
 
 
-XML_PATH = 'resources/data/aircraft.xml'
-
-AIRCRAFT_NAME = 'cessna_172'
-
-AEROMATIC_SCRIPT_FOLDER = 'resources'
-AEROMATIC_SCRIPT_FILE = 'script_aeromatic.txt'
-
-aeromatic_script_path = os.path.join(AEROMATIC_SCRIPT_FOLDER, AEROMATIC_SCRIPT_FILE)
-
-generate_script(aeromatic_script_path, XML_PATH, AIRCRAFT_NAME)
+# XML_PATH = 'resources/data/aircraft.xml'
+#
+# AIRCRAFT_NAME = 'cessna_172'
+#
+# AEROMATIC_SCRIPT_FOLDER = 'resources'
+# AEROMATIC_SCRIPT_FILE = 'script_aeromatic.txt'
+#
+# aeromatic_script_path = os.path.join(AEROMATIC_SCRIPT_FOLDER, AEROMATIC_SCRIPT_FILE)
+#
+# generate_script(aeromatic_script_path, XML_PATH, AIRCRAFT_NAME)

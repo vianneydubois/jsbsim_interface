@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 
 <!--
-  File:     cessna_172_engine.xml
+  File:     new_cessna_engine.xml
   Author:   AeromatiC++ v 3.3.12
 
   See: http://wiki.flightgear.org/JSBSim_Engines#FGPiston
 
   Inputs:
-    name:           cessna_172_engine
+    name:           new_cessna_engine
     type:           Piston Engine
     power:          179.694 hp
 -->
 
-<piston_engine name="cessna_172_engine">
+<piston_engine name="new_cessna_engine">
   <minmp unit="INHG">         10.0 </minmp>
   <maxmp unit="INHG">         28.5 </maxmp>
     <displacement unit="IN3"> 341.419 </displacement>

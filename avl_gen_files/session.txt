@@ -1,0 +1,14 @@
+LOAD
+/Users/vianneydubois/PycharmProjects/jsbsim_interface/avl_gen_files/gen_geom.avl
+OPER
+M
+MN
+0.2
+D
+1.0
+
+X
+ST
+/Users/vianneydubois/PycharmProjects/jsbsim_interface/avl_gen_files/out.txt
+
+QUIT

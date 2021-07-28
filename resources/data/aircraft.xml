@@ -3,6 +3,7 @@
 	<data>
 		<TLAR>
 			<approach_speed units="m/s">33.33</approach_speed>
+			<cruise_mach units="">0.2</cruise_mach>
 		</TLAR>
 		<geometry>
 			<fuselage>
@@ -20,10 +21,22 @@
 			</wing>
 			<horizontal_tail>
 				<area units="m**2">3.83</area>
+				<x_le_offset units="m">4.64</x_le_offset>
+				<z_le_offset units="m">-0.46</z_le_offset>
+				<span units="m">3.56</span>
+				<root_chord units="m">1.4</root_chord>
+				<tip_chord units="m">0.75</tip_chord>
+				<tip_x_offset units="m">0.28</tip_x_offset>
 				<arm units="m">5.27</arm>
 			</horizontal_tail>
 			<vertical_tail>
-				<area units="m**2">1.085</area>
+				<area units="m**2">1.85</area>
+				<x_le_offset units="m">4.07</x_le_offset>
+				<z_le_offset units="m">-0.29</z_le_offset>
+				<span units="m">1.33</span>
+				<root_chord units="m">2.0</root_chord>
+				<tip_chord units="m">0.79</tip_chord>
+				<tip_x_offset units="m">1.62</tip_x_offset>
 				<arm units="m">4.52</arm>
 			</vertical_tail>
 			<propulsion>

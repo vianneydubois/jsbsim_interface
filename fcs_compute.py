@@ -1,0 +1,52 @@
+import aeromatic_script_from_xml as aeromatic_xml
+import aeromatic_script_editor as aeromatic_edit
+import aeromatic_run as aeromatic
+import avl_python_functions as avl
+import avl_jsbsim_coefficient as avl_jsbsim
+import jsbsim_run as jsbsim
+import post_processing as pp
+import os
+
+
+def compute(desired_script_name, init_file_name, xml_file_path, aircraft_name, fcs_x_c):
+    # 1 : run aeromatic to generate the JSBSim aircraft config file
+    aeromatic_script_path = os.path.join('resources', 'aeromatic_script.txt')
+    aeromatic_xml.generate_script(aeromatic_script_path, xml_file_path, aircraft_name)
+    aeromatic_edit.edit_aeromatic_script(aeromatic_script_path, aircraft_name)  # useless?
+    aeromatic.aeromatic_run(aeromatic_script_path, 'resources/executables/aeromatic')
+
+    # 2 : run AVL
+    avl.generate_geometry('resources/geom.avl', 'avl_gen_files/gen_geom.avl', xml_file_path, fcs_x_c)
+    avl.edit_avl_session('avl_gen_files/session.txt', 'avl_gen_files/gen_geom.avl', 'avl_gen_files/out.txt', 0.8)
+    avl.run_avl('resources/executables/avl335', 'avl_gen_files/session.txt',
+                'avl_gen_files/gen_geom.avl', 'avl_gen_files/out.txt')
+
+    # 3 : integrate AVL coefficients in JSBSim aircraft config file
+    jsbsim_config_path = os.path.join('aircraft', aircraft_name, aircraft_name + '.xml')
+    avl_jsbsim.integrate_avl_coef('avl_gen_files/out.txt', jsbsim_config_path)
+
+    # 4 : run JSSim
+    jsbsim.copy_script_file(desired_script_name, aircraft_name)
+    jsbsim.edit_jsbsim_script(desired_script_name, aircraft_name, init_file_name)
+    jsbsim.run_jsbsim('resources/JSBSim.py', aircraft_name, desired_script_name)
+    jsbsim.remove_script_file(aircraft_name)
+
+    # 5 : post processing
+    result = False
+    if desired_script_name == 'yaw':
+        result = pp.process_rudder(aircraft_name, 15, 7)
+    elif desired_script_name == 'roll':
+        result = pp.process_roll(aircraft_name, -60, 11)
+    return result
+
+
+aircraft_name = 'c172'
+script = 'roll'
+init = 'airborne'
+aircraft_xml_source = os.path.join('resources', 'data', 'aircraft.xml')
+fcs_x_c = [0.8, 0.66, 0.62]  # aileron, elevator, rudder
+
+print(compute(script, init, aircraft_xml_source, aircraft_name, fcs_x_c))
+
+# folder for avl template and aeromatic script
+# executables for windows : OS auto detect

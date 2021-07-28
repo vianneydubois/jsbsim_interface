@@ -1,10 +1,10 @@
 <?xml version="1.0" ?>
-<fdm_config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="c172" version="2.0" release="ALPHA" xsi:noNamespaceSchemaLocation="http://jsbsim.sourceforge.net/JSBSim.xsd">
+<fdm_config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="new_cessna" version="2.0" release="ALPHA" xsi:noNamespaceSchemaLocation="http://jsbsim.sourceforge.net/JSBSim.xsd">
 	<fileheader>
 		<author> Aeromatic v 3.3.12 </author>
-		<filecreationdate> 28 Jul 2021 </filecreationdate>
+		<filecreationdate> 21 Jul 2021 </filecreationdate>
 		<version>$Revision: 1.80 $</version>
-		<description> Models a c172. </description>
+		<description> Models a new_cessna. </description>
 	</fileheader>
 	<metrics>
 		<wingarea unit="FT2">   174.05 </wingarea>
@@ -52,7 +52,7 @@
 		</pointmass>
 	</mass_balance>
 	<propulsion>
-		<engine file="c172_engine">
+		<engine file="new_cessna_engine">
 			<location unit="IN">
 				<x>    36.00 </x>
 				<y>     0.00 </y>
@@ -64,7 +64,7 @@
 				<yaw>     0.00 </yaw>
 			</orient>
 			<feed> 0 </feed>
-			<thruster file="c172_prop">
+			<thruster file="new_cessna_prop">
 				<sense> 1 </sense>
 				<location unit="IN">
 					<x>    36.00 </x>
@@ -166,7 +166,7 @@
 			<damping_coeff unit="LBS/FT/SEC"> 2551.18 </damping_coeff>
 		</contact>
 	</ground_reactions>
-	<flight_control name="FCS: c172">
+	<flight_control name="FCS: new_cessna">
 		<channel name="Pitch">
 			<summer name="Pitch Trim Sum">
 				<input>fcs/elevator-cmd-norm</input>
