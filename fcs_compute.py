@@ -9,7 +9,15 @@ import os
 import platform
 
 
-def compute(desired_script_name, init_file_name, xml_file_path, aircraft_name, fcs_x_c):
+def compute(desired_script_name: str, init_file_name: str, xml_file_path: str, aircraft_name: str, fcs_x_c: list):
+    """
+    :param desired_script_name: XML JSBSim script file for the desired manoeuvre
+    :param init_file_name: XML JSBSim initialize file
+    :param xml_file_path: XML geometry source file for the aircraft
+    :param aircraft_name: name of the aircraft, will be the name of the aircraft folder
+    :param fcs_x_c: flight control surfaces hinge positions - [ailerons, elevator, rudder]
+    :return:
+    """
     os_name = platform.system()  # required for executables choices
 
     # 1 : running Aeromatic to generate the JSBSim aircraft config file
@@ -57,9 +65,13 @@ def compute(desired_script_name, init_file_name, xml_file_path, aircraft_name, f
     # 5 : post processing
     result = False
     if desired_script_name == 'yaw':
-        result = pp.process_rudder(aircraft_name, 15, 7)
+        delta_psi = 15
+        t_lim = 7
+        result = pp.process_rudder(aircraft_name, delta_psi, t_lim)
     elif desired_script_name == 'roll':
-        result = pp.process_roll(aircraft_name, -60, 11)
+        delta_phi = -60
+        t_lim = 11
+        result = pp.process_roll(aircraft_name, delta_phi, t_lim)
     return result
 
 
