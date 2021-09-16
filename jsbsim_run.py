@@ -24,7 +24,7 @@ def edit_jsbsim_script(script_name: str, aircraft_name: str, init_file_name: str
         script_file.write('<?xml-stylesheet type="text/xsl" href="http://jsbsim.sf.net/JSBSimScript.xsl"?>\n')
         script_file.write(script_str.decode())
 
-    return
+    return None
 
 
 def run_jsbsim(jsbsim_source_path: str, aircraft_name: str, script_name: str):
@@ -34,7 +34,7 @@ def run_jsbsim(jsbsim_source_path: str, aircraft_name: str, script_name: str):
     command += jsbsim_source_path
     command += ' --script=' + jsbsim_script_path
     os.system(command)
-    return
+    return None
 
 
 def copy_script_file(desired_script_name: str, aircraft_name: str):
@@ -59,7 +59,7 @@ def copy_script_file(desired_script_name: str, aircraft_name: str):
     # copy initialize file
     init_source_file = os.path.join('resources', 'sim_init', 'airborne.xml')
     with open(init_source_file, 'r') as source:
-        # copy source scriptq
+        # copy source script
         source_init = source.readlines()
 
         destination_path = os.path.join(scripts_folder_path, 'airborne.xml')
@@ -67,25 +67,11 @@ def copy_script_file(desired_script_name: str, aircraft_name: str):
             # write into a new file
             destination.writelines(source_init)
 
-    return
+    return None
 
 
 def remove_script_file(aircraft_name: str):
     # removes the 'scripts' folder created in the aircraft folder prior to jsbsim run
     scripts_folder_path = os.path.join('aircraft', aircraft_name, 'scripts')
     shutil.rmtree(scripts_folder_path)
-    return
-
-
-# AIRCRAFT_NAME = 'c172'
-# INIT_FILE_NAME = 'airborne'
-# SCRIPT_FILE_NAME = 'yaw'
-#
-# JSBSIM_SOURCE_PATH = os.path.join('resources', 'JSBSim.py')
-#
-# jsbsim_script_path = os.path.join('aircraft', AIRCRAFT_NAME, 'scripts', SCRIPT_FILE_NAME + '.xml')
-#
-# copy_script_file(SCRIPT_FILE_NAME, AIRCRAFT_NAME)
-# edit_jsbsim_script(SCRIPT_FILE_NAME, AIRCRAFT_NAME, INIT_FILE_NAME)
-# run_jsbsim(JSBSIM_SOURCE_PATH, AIRCRAFT_NAME, SCRIPT_FILE_NAME)
-# remove_script_file(AIRCRAFT_NAME)
+    return None
